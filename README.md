@@ -1,5 +1,10 @@
 # dipPI
 
+![Styracosaurus](images/IMG_4496-2.JPG)
+_Styracosaurus albertensis_ \n
+Photo Copyright © 2017 seb231
+Drawing Copyright © 2017 [James Robbins](http://www.jr-illustration.co.uk/)
+
 A Clojure library for calling the Natural History Museum's Data Portal API:
 
 http://data.nhm.ac.uk/about/download
