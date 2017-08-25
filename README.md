@@ -1,6 +1,7 @@
 # dipPI
 
 ![Styracosaurus](images/IMG_4496-2.JPG)
+
 _Styracosaurus albertensis_
 Photo Copyright © 2017 seb231
 Drawing Copyright © 2017 [James Robbins](http://www.jr-illustration.co.uk/)
