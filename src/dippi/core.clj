@@ -38,3 +38,8 @@
 
 (def artefacts "resource_id=ec61d82a-748d-4b53-8e99-3e708e76bc4d" )
 
+(comment  "&q=Archaeopteryx"
+
+          "&limit=5"
+
+          "&filters={\"catalogNumber\":\"PV P 51007\"}")
