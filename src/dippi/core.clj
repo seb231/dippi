@@ -22,6 +22,12 @@
   [database search-type search-by]
   (slurp-json (str "http://data.nhm.ac.uk/api/action/datastore_search?" database search-type search-by)))
 
+(defn query-nhm-api
+  "Expects a name of a database (see http://data.nhm.ac.uk/dataset?author=Natural+History+Museum)
+   and a query string i.e \"Archaeopteryx\""
+  [database query]
+  (search-nhm-api database "&q=" query))
+
 (def collection-specimens "resource_id=05ff2255-c38a-40c9-b657-4ccb55ab2feb")
 
 (def artefacts "resource_id=ec61d82a-748d-4b53-8e99-3e708e76bc4d" )
