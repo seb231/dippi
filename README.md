@@ -32,11 +32,9 @@ More information about the databases can be found here: http://data.nhm.ac.uk/da
 
 1. Read [CKAN API guide](http://docs.ckan.org/en/latest/api/index.html) to work out what functionality I need to bring in.
 
-2. Add additional database access.
+2. Interrogate some collection results to see what further "get" functions would be beneficial.
 
-3. Interrogate some collection results to see what further "get" functions would be beneficial.
-
-4. Build uberjar with -main multifunctionality.
+3. Build uberjar with -main multifunctionality.
 
 ## License
 
