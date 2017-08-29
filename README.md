@@ -18,9 +18,9 @@ DOI: 10.5519
 
 (At the moment) start a REPL and run either `query-nhm-api` or `filter-nhm-api` with a database name and the following:
 
-A "Query" search expects a name of a [database](http://data.nhm.ac.uk/dataset?author=Natural+History+Museum) and a query string i.e "Archaeopteryx".
+A "**Query**" search expects a name of a [database](http://data.nhm.ac.uk/dataset?author=Natural+History+Museum) and a query string i.e "Archaeopteryx".
 
-A "Filter" search expects a name of a [database](http://data.nhm.ac.uk/dataset?author=Natural+History+Museum) and a filter field and search string i.e "catalogNumber" and "PV P 51007"
+A "**Filter**" search expects a name of a [database](http://data.nhm.ac.uk/dataset?author=Natural+History+Museum) and a filter field and search string i.e "catalogNumber" and "PV P 51007"
 
 #### Databases
 
