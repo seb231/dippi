@@ -16,11 +16,19 @@ DOI: 10.5519
 
 ## Usage
 
-TODO
+(At the moment) start a REPL and run either `query-nhm-api` or `filter-nhm-api` with a database name and the following:
+
+"Query" search expects a name of a [database](http://data.nhm.ac.uk/dataset?author=Natural+History+Museum) and a query string i.e "Archaeopteryx".
+
+"Filter" search expects a name of a [database](http://data.nhm.ac.uk/dataset?author=Natural+History+Museum) and a filter field and search string i.e "catalogNumber" and "PV P 51007"
+
+## TODO
 
 1. Read [CKAN API guide](http://docs.ckan.org/en/latest/api/index.html) to work out what functionality I need to bring in.
 
 2. Interrogate some collection results to see what further "get" functions would be beneficial
+
+3. Build uberjar with -main multifunctionality
 
 ## License
 
