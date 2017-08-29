@@ -37,7 +37,13 @@
 
 (def collection-specimens "resource_id=05ff2255-c38a-40c9-b657-4ccb55ab2feb")
 
-(def artefacts "resource_id=ec61d82a-748d-4b53-8e99-3e708e76bc4d" )
+(def artefacts "resource_id=ec61d82a-748d-4b53-8e99-3e708e76bc4d")
+
+(def former-bp "resource_id=a5f98284-8c19-4636-ae24-01b60cb6b9a4")
+
+(def index-lot "resource_id=bb909597-dedf-427d-8c04-4c02b3a24db3")
+
+(def interactions-bank "resource_id=9f49865f-ca81-488e-8738-82c569fb562e")
 
 (comment  "&q=Archaeopteryx"
 
