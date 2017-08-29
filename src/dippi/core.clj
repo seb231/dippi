@@ -30,7 +30,7 @@
 
 (defn filter-nhm-api
   "Expects a name of a database (see http://data.nhm.ac.uk/dataset?author=Natural+History+Museum)
-   and a filter field and search string i.e \"Archaeopteryx\""
+   and a filter field and search string i.e \"catalogNumber\" \"PV P 51007\""
   [database field query]
   (let [filter-by (str "{\"" field "\":\"" query "\"}")]
     (search-nhm-api database "&filters=" filter-by)))
