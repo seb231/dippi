@@ -4,5 +4,8 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.8.0"]
-                 [clj-http "0.7.8"]]
-  :main ^:skip-aot dippi.core)
+                 [clj-http "0.7.8"]
+                 [org.clojure/tools.cli "0.3.3"]]
+  :main ^:skip-aot dippi.core
+  :target-path "target/%s"
+  :profiles {:uberjar {:aot :all}})

@@ -1,5 +1,7 @@
 (ns dippi.core
-  (:require [clj-http.client :as client]))
+  (:require [clj-http.client :as client]
+            [clojure.tools.cli :refer [parse-opts]])
+  (:gen-class))
 
 (defn slurp-json
   "Returns the contents of the url pointing to a json."
@@ -16,9 +18,7 @@
 
   - collection-specimens
 
-  - artefacts
-
-  "
+  - artefacts"
   [database search-type search-by]
   (slurp-json (str "http://data.nhm.ac.uk/api/action/datastore_search?" database search-type search-by)))
 
@@ -36,23 +36,29 @@
   (let [filter-by (str "{\"" field "\":\"" query "\"}")]
     (search-nhm-api database "&filters=" filter-by)))
 
-(def collection-specimens "resource_id=05ff2255-c38a-40c9-b657-4ccb55ab2feb")
-
-(def artefacts "resource_id=ec61d82a-748d-4b53-8e99-3e708e76bc4d")
-
-(def former-bp "resource_id=a5f98284-8c19-4636-ae24-01b60cb6b9a4")
-
-(def index-lot "resource_id=bb909597-dedf-427d-8c04-4c02b3a24db3")
-
-(def interactions-bank "resource_id=9f49865f-ca81-488e-8738-82c569fb562e")
-
-(comment  "&q=Archaeopteryx"
-
-          "&limit=5"
-
-          "&filters={\"catalogNumber\":\"PV P 51007\"}")
 
 ;; a query can contain multiple records (# recorded in :total), which are stored in :records
 
 ;; 145 potential fields, each with a :type (i.e. text) and an :id (a string, that is a keyword
 ;; in the :records
+
+#_(defn -main
+    ([database]
+     (prn (query-nhm-api database "Archaeopteryx")))
+    ([database field query]
+     (prn (filter-nhm-api database field query))))
+
+(def collections
+  {:artefacts "resource_id=ec61d82a-748d-4b53-8e99-3e708e76bc4d"
+   :specimens "resource_id=05ff2255-c38a-40c9-b657-4ccb55ab2feb"
+   :former-bp "resource_id=a5f98284-8c19-4636-ae24-01b60cb6b9a4"
+   :index-lot "resource_id=bb909597-dedf-427d-8c04-4c02b3a24db3"
+   :interactions-bank "resource_id=9f49865f-ca81-488e-8738-82c569fb562e"})
+
+
+(def cli-options
+  [["-d" "--database"]])
+
+(defn -main [database]
+  (let [db @(ns-resolve (find-ns 'dippi.core) (symbol database))]
+    (prn (query-nhm-api db "Archaeopteryx"))))
