@@ -18,17 +18,25 @@ DOI: 10.5519
 
 (At the moment) start a REPL and run either `query-nhm-api` or `filter-nhm-api` with a database name and the following:
 
-"Query" search expects a name of a [database](http://data.nhm.ac.uk/dataset?author=Natural+History+Museum) and a query string i.e "Archaeopteryx".
+A "Query" search expects a name of a [database](http://data.nhm.ac.uk/dataset?author=Natural+History+Museum) and a query string i.e "Archaeopteryx".
 
-"Filter" search expects a name of a [database](http://data.nhm.ac.uk/dataset?author=Natural+History+Museum) and a filter field and search string i.e "catalogNumber" and "PV P 51007"
+A "Filter" search expects a name of a [database](http://data.nhm.ac.uk/dataset?author=Natural+History+Museum) and a filter field and search string i.e "catalogNumber" and "PV P 51007"
+
+#### Databases
+
+Currently the only databases available are `collection-specimens` and `artefacts`.
+
+More information about the databases can be found here: http://data.nhm.ac.uk/dataset
 
 ## TODO
 
 1. Read [CKAN API guide](http://docs.ckan.org/en/latest/api/index.html) to work out what functionality I need to bring in.
 
-2. Interrogate some collection results to see what further "get" functions would be beneficial
+2. Add additional database access.
 
-3. Build uberjar with -main multifunctionality
+3. Interrogate some collection results to see what further "get" functions would be beneficial.
+
+4. Build uberjar with -main multifunctionality.
 
 ## License
 
