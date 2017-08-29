@@ -18,6 +18,10 @@ DOI: 10.5519
 
 TODO
 
+1. Read [CKAN API guide](http://docs.ckan.org/en/latest/api/index.html) to work out what functionality I need to bring in.
+
+2. Interrogate some collection results to see what further "get" functions would be beneficial
+
 ## License
 
 Copyright © 2017 seb231
