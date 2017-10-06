@@ -26,7 +26,8 @@
   "Expects a name of a database (see http://data.nhm.ac.uk/dataset?author=Natural+History+Museum)
    and a query string i.e \"Archaeopteryx\""
   [database query]
-  (search-nhm-api database "&q=" query))
+  (-> (search-nhm-api database "&q=" query)
+      :records))
 
 (defn filter-nhm-api
   "Expects a name of a database (see http://data.nhm.ac.uk/dataset?author=Natural+History+Museum)
@@ -50,3 +51,8 @@
           "&limit=5"
 
           "&filters={\"catalogNumber\":\"PV P 51007\"}")
+
+;; a query can contain multiple records (# recorded in :total), which are stored in :records
+
+;; 145 potential fields, each with a :type (i.e. text) and an :id (a string, that is a keyword
+;; in the :records
