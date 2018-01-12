@@ -61,3 +61,10 @@
    ["-q" "--query QUERY" "Search query"]
    ["-f" "--field FIELD" "Search field for filtering"]])
 
+(defn -main [& args]
+  (let [{:keys [options arguments summary]} (parse-opts args cli-options)
+        {:keys [database query field]} options
+        db ((keyword database) collections)]
+    (prn (if (empty? field)
+           (query-nhm-api db query)
+           (filter-nhm-api db field query)))))
