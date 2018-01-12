@@ -57,8 +57,7 @@
 
 
 (def cli-options
-  [["-d" "--database"]])
+  [["-d" "--database DATABASE" "Database name"]
+   ["-q" "--query QUERY" "Search query"]
+   ["-f" "--field FIELD" "Search field for filtering"]])
 
-(defn -main [database]
-  (let [db @(ns-resolve (find-ns 'dippi.core) (symbol database))]
-    (prn (query-nhm-api db "Archaeopteryx"))))
