@@ -1,5 +1,7 @@
 (ns dippi.core
-  (:require [clj-http.client :as client]))
+  (:require [clj-http.client :as client]
+            [clojure.tools.cli :refer [parse-opts]])
+  (:gen-class))
 
 (defn slurp-json
   "Returns the contents of the url pointing to a json."
@@ -16,9 +18,7 @@
 
   - collection-specimens
 
-  - artefacts
-
-  "
+  - artefacts"
   [database search-type search-by]
   (slurp-json (str "http://data.nhm.ac.uk/api/action/datastore_search?" database search-type search-by)))
 
@@ -26,8 +26,7 @@
   "Expects a name of a database (see http://data.nhm.ac.uk/dataset?author=Natural+History+Museum)
    and a query string i.e \"Archaeopteryx\""
   [database query]
-  (-> (search-nhm-api database "&q=" query)
-      :records))
+  (search-nhm-api database "&q=" query))
 
 (defn filter-nhm-api
   "Expects a name of a database (see http://data.nhm.ac.uk/dataset?author=Natural+History+Museum)
@@ -36,23 +35,37 @@
   (let [filter-by (str "{\"" field "\":\"" query "\"}")]
     (search-nhm-api database "&filters=" filter-by)))
 
-(def collection-specimens "resource_id=05ff2255-c38a-40c9-b657-4ccb55ab2feb")
-
-(def artefacts "resource_id=ec61d82a-748d-4b53-8e99-3e708e76bc4d")
-
-(def former-bp "resource_id=a5f98284-8c19-4636-ae24-01b60cb6b9a4")
-
-(def index-lot "resource_id=bb909597-dedf-427d-8c04-4c02b3a24db3")
-
-(def interactions-bank "resource_id=9f49865f-ca81-488e-8738-82c569fb562e")
-
-(comment  "&q=Archaeopteryx"
-
-          "&limit=5"
-
-          "&filters={\"catalogNumber\":\"PV P 51007\"}")
-
-;; a query can contain multiple records (# recorded in :total), which are stored in :records
-
 ;; 145 potential fields, each with a :type (i.e. text) and an :id (a string, that is a keyword
 ;; in the :records
+
+(def collections
+  {:artefacts "resource_id=ec61d82a-748d-4b53-8e99-3e708e76bc4d"
+   :specimens "resource_id=05ff2255-c38a-40c9-b657-4ccb55ab2feb"
+   :former-bp "resource_id=a5f98284-8c19-4636-ae24-01b60cb6b9a4"
+   :index-lot "resource_id=bb909597-dedf-427d-8c04-4c02b3a24db3"
+   :interactions-bank "resource_id=9f49865f-ca81-488e-8738-82c569fb562e"})
+
+
+(def cli-options
+  [["-d" "--database DATABASE" "Database name"]
+   ["-q" "--query QUERY" "Search query"]
+   ["-f" "--field FIELD" "Search field for filtering"]
+   ["-n" "--number NUMBER" "Returns count of records"]])
+
+(defn -main [& args]
+  (let [{:keys [options arguments summary]} (parse-opts args cli-options)
+        {:keys [database query field number]} options
+        db ((keyword database) collections)]
+    (if (empty? field)
+      (let [result (query-nhm-api db query)]
+        (if (nil? result)
+          (prn "No records!")
+          (if (empty? number)
+            (prn (:records result))
+            (prn (str "Number of records: " (:total result))))))
+      (let [result (filter-nhm-api db field query)]
+        (if (nil? result)
+          (prn "No records!")
+          (if (empty? number)
+            (prn (:records result))
+            (prn (str "Number of records: " (:total result)))))))))
