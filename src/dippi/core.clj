@@ -36,17 +36,8 @@
   (let [filter-by (str "{\"" field "\":\"" query "\"}")]
     (search-nhm-api database "&filters=" filter-by)))
 
-
-;; a query can contain multiple records (# recorded in :total), which are stored in :records
-
 ;; 145 potential fields, each with a :type (i.e. text) and an :id (a string, that is a keyword
 ;; in the :records
-
-#_(defn -main
-    ([database]
-     (prn (query-nhm-api database "Archaeopteryx")))
-    ([database field query]
-     (prn (filter-nhm-api database field query))))
 
 (def collections
   {:artefacts "resource_id=ec61d82a-748d-4b53-8e99-3e708e76bc4d"
