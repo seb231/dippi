@@ -57,9 +57,15 @@
         {:keys [database query field number]} options
         db ((keyword database) collections)]
     (if (empty? field)
-      (if (empty? number)
-        (prn (:records (query-nhm-api db query)))
-        (prn (str "Number of records: " (:total (query-nhm-api db query)))))
-      (if (empty? number)
-        (prn (:records (filter-nhm-api db field query)))
-        (prn (str "Number of records: " (:total (filter-nhm-api db field query))))))))
+      (let [result (query-nhm-api db query)]
+        (if (nil? result)
+          (prn "No records!")
+          (if (empty? number)
+            (prn (:records result))
+            (prn (str "Number of records: " (:total result))))))
+      (let [result (filter-nhm-api db field query)]
+        (if (nil? result)
+          (prn "No records!")
+          (if (empty? number)
+            (prn (:records result))
+            (prn (str "Number of records: " (:total result)))))))))
