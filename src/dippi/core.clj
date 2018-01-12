@@ -26,8 +26,7 @@
   "Expects a name of a database (see http://data.nhm.ac.uk/dataset?author=Natural+History+Museum)
    and a query string i.e \"Archaeopteryx\""
   [database query]
-  (-> (search-nhm-api database "&q=" query)
-      :records))
+  (search-nhm-api database "&q=" query))
 
 (defn filter-nhm-api
   "Expects a name of a database (see http://data.nhm.ac.uk/dataset?author=Natural+History+Museum)
@@ -50,12 +49,17 @@
 (def cli-options
   [["-d" "--database DATABASE" "Database name"]
    ["-q" "--query QUERY" "Search query"]
-   ["-f" "--field FIELD" "Search field for filtering"]])
+   ["-f" "--field FIELD" "Search field for filtering"]
+   ["-n" "--number NUMBER" "Returns count of records"]])
 
 (defn -main [& args]
   (let [{:keys [options arguments summary]} (parse-opts args cli-options)
-        {:keys [database query field]} options
+        {:keys [database query field number]} options
         db ((keyword database) collections)]
-    (prn (if (empty? field)
-           (query-nhm-api db query)
-           (filter-nhm-api db field query)))))
+    (if (empty? field)
+      (if (empty? number)
+        (prn (:records (query-nhm-api db query)))
+        (prn (str "Number of records: " (:total (query-nhm-api db query)))))
+      (if (empty? number)
+        (prn (:records (filter-nhm-api db field query)))
+        (prn (str "Number of records: " (:total (filter-nhm-api db field query))))))))
